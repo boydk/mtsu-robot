@@ -60,9 +60,9 @@ const int HOME_TARGET = 315; // location sensor value
 const int DETECT_EGG_DISTANCE = 30;
 const int DETECT_EGG_CLOSE = 10;
 // light on
-//const int LIGHT_SENSOR_BLACK = 35;
+const int LIGHT_SENSOR_BLACK = 35;
 // light off
-const int LIGHT_SENSOR_BLACK = 12;
+//const int LIGHT_SENSOR_BLACK = 12;
 
 const int ARMS_OPEN = -55;
 const int ARMS_CLOSED = 10;
@@ -152,11 +152,11 @@ task Wander()
 		    {
 		    	if (randDirection)
 		    	{
-		    		turnLeft(CURRENT_SPEED);
+		    		turnLeft(CURRENT_SPEED-20);
 		    	}
 		    	else
 		    	{
-		    		turnRight(CURRENT_SPEED);
+		    		turnRight(CURRENT_SPEED-20);
 		    	}
 		    }
 		    goingForward = true;
@@ -437,6 +437,11 @@ task PushEggIntoNest()
 //==========================================================================================================================================
 
 // use T2 for wall avoid
+
+// notes for next time
+// have default behavior move back further and turn more?
+// if it has an egg, keep small backing
+
 task DetectWall()
 {
   while(true)
@@ -466,7 +471,7 @@ task DetectWall()
     	// turnRight
     	while (time1[T2] < 300)
     	{
-    		turnRight(CURRENT_SPEED);
+    		turnRight(CURRENT_SPEED - 20);
     	}
 
     	wait1Msec(300);
@@ -498,7 +503,7 @@ task DetectWall()
     	// turnLeft
     	while (time1[T2] < 300)
     	{
-    		turnLeft(CURRENT_SPEED);
+    		turnLeft(CURRENT_SPEED - 20);
     	}
 
     	wait1Msec(300);
@@ -706,7 +711,7 @@ task main()
 	int nrm = 0;
 
 	// Turn the light on
-  //LSsetActive(LEGOLS);
+  LSsetActive(LEGOLS);
 
 	// wait for enter press to set "new north"
 	while(nNxtButtonPressed != kEnterButton)
